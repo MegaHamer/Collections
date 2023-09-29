@@ -9,31 +9,51 @@ fun main() {
 fun threeTask(){
     //делаю случайный алфавит
     //делаю две коллекции для букв и случайных чисел от 1 до 33
-    val bukvi= ('A'..'Z').toMutableSet()
-    val cifri = mutableSetOf((1..33).random())
+    val bukvi= ('А'..'Е')+'Ё'+('Ж'..'Я').toMutableSet()
+    val cifri = mutableSetOf((0 .. 32).random())
     while(cifri.size != 33){
-        cifri.add((1..33).random())
+        cifri.add((0..32).random())
     }
     //соединяю коллекции в map
     val alf: Map<Char, Int> = bukvi.zip(cifri).toMap()
     println(alf)
+    var shifr:String =""
     for (iii in generateSequence(0) { it }){
         println("\nВыберите дейстиве: \n1.Шифровка\n2.Расшифровка\n3.Выход")
-        var shifr =""
         when(readln()){
             "1"->{
-                println("Введи слово для шифровки")
+                print("Введие ключевое слово: ")
+                val key = readln().toString().uppercase()
+                print("Введи слово для шифровки: ")
                 val word = readln().toString().uppercase()
+                shifr = ""
                 for (i in 0 until word.length){
-                    print("${alf.get(word[i])} ")
+                    shifr+=alf.filterValues { it == (alf.get(word[i])!! +(alf.get(key[i%4])!!))!! %33 }.keys
                 }
-
+                print("Защифрованное слово - ")
+                shifr.forEach { print(it) }
             }
             "2"->{
+                println("Выберите действие: \n1.Расшифровать ранее зашифрованный текст(из 1 действия)\n2.Ввести свой шифр(старый шифр сотрется)")
+                when(readln()){
+                    "1"->{
+                        print("Введие ключевое слово: ")
+                        val key = readln().toString().uppercase()
+                        var word =""
+                        for (i in 0 until shifr.length){
+                            word+=alf.filterValues { it == (alf.get(shifr[i])!! +(alf.get(key[i%4])!!))!! %33 }
+                        }
+                        print("Расшифрованное слово - ")
+                        word.forEach { print(it) }
+                    }
+                    "2"->{
 
+                    }
+                    else -> println("Хаха, смешно")
+                }
             }
             "3"->{
-
+                break
             }
         }
     }
