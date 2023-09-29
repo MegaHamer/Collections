@@ -16,10 +16,17 @@ fun threeTask(){
     }
     //соединяю коллекции в map
     val alf: Map<Char, Int> = bukvi.zip(cifri).toMap()
-    for (i in generateSequence(0) { it }){
-        println("Выберите дейстиве: \n1.Шифровка\n2.Расшифровка\n3.Выход")
+    println(alf)
+    for (iii in generateSequence(0) { it }){
+        println("\nВыберите дейстиве: \n1.Шифровка\n2.Расшифровка\n3.Выход")
+        var shifr =""
         when(readln()){
             "1"->{
+                println("Введи слово для шифровки")
+                val word = readln().toString().uppercase()
+                for (i in 0 until word.length){
+                    print("${alf.get(word[i])} ")
+                }
 
             }
             "2"->{
