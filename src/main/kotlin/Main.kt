@@ -2,12 +2,37 @@ import kotlin.random.Random
 
 fun main() {
     //oneTask()
-    twoTask()
-    //threeTask()
+    //twoTask()
+    threeTask()
 }
 
 fun threeTask(){
-    val alf = mapOf('A' to 1,'B' to 2)
+    //делаю случайный алфавит
+    //делаю две коллекции для букв и случайных чисел от 1 до 33
+    val bukvi= ('A'..'Z').toMutableSet()
+    val cifri = mutableSetOf((1..33).random())
+    while(cifri.size != 33){
+        cifri.add((1..33).random())
+    }
+    //соединяю коллекции в map
+    val alf: Map<Char, Int> = bukvi.zip(cifri).toMap()
+    for (i in generateSequence(0) { it }){
+        println("Выберите дейстиве: \n1.Шифровка\n2.Расшифровка\n3.Выход")
+        when(readln()){
+            "1"->{
+
+            }
+            "2"->{
+
+            }
+            "3"->{
+
+            }
+        }
+    }
+
+
+
 }
 
 fun twoTask(){
