@@ -3,7 +3,12 @@ import kotlin.random.Random
 fun main() {
     //oneTask()
     //twoTask()
-    threeTask()
+    //threeTask()
+    fiveTask()
+}
+
+fun fiveTask(){
+
 }
 
 fun threeTask(){
@@ -20,15 +25,15 @@ fun threeTask(){
     var shifr:String =""
     for (iii in generateSequence(0) { it }){
         println("\nВыберите дейстиве: \n1.Шифровка\n2.Расшифровка\n3.Выход")
-        when(readln()){
+        when(readln()){ //выбераю действие
             "1"->{
                 print("Введие ключевое слово: ")
                 val key = readln().toString().uppercase()
                 print("Введи слово для шифровки: ")
                 val word = readln().toString().uppercase()
                 shifr = ""
-                for (i in 0 until word.length){
-                    shifr+=alf.filterValues { it == (alf.get(word[i])!! +(alf.get(key[i%4])!!))!! %33 }.keys
+                for (i in 0 until word.length){//вытасиваю из алфавита цифры, складываю, обрезаю, превращаю в список ключей из символов в строку
+                    shifr+=alf.filterValues { it == (alf.get(word[i])!! +(alf.get(key[i%4])!!))!! %33 }.keys.toCharArray().joinToString()
                 }
                 print("Защифрованное слово - ")
                 shifr.forEach { print(it) }
@@ -40,14 +45,23 @@ fun threeTask(){
                         print("Введие ключевое слово: ")
                         val key = readln().toString().uppercase()
                         var word =""
-                        for (i in 0 until shifr.length){
-                            word+=alf.filterValues { it == (alf.get(shifr[i])!! +(alf.get(key[i%4])!!))!! %33 }
+                        for (i in 0 until shifr.length){//как в шифраторе только тут есть +33 чтоб не было отрицательных значений
+                            word+=alf.filterValues { it == (alf.get(shifr[i])!! -(alf.get(key[i%4])!!)+33)!! %33 }.keys.toCharArray().joinToString()
                         }
                         print("Расшифрованное слово - ")
                         word.forEach { print(it) }
                     }
                     "2"->{
-
+                        print("Введие ключевое слово: ")
+                        val key = readln().toString().uppercase()
+                        var word =""
+                        print("Введите шифр: ")
+                        shifr = readln().toString().uppercase()
+                        for (i in 0 until shifr.length){
+                            word+=alf.filterValues { it == (alf.get(shifr[i])!! -(alf.get(key[i%4])!!)+33)!! %33 }.keys.toCharArray().joinToString()
+                        }
+                        print("Расшифрованное слово - ")
+                        word.forEach { print(it) }
                     }
                     else -> println("Хаха, смешно")
                 }
@@ -55,6 +69,7 @@ fun threeTask(){
             "3"->{
                 break
             }
+            else -> println("Хаха, смешно")
         }
     }
 
