@@ -8,7 +8,28 @@ fun main() {
 }
 
 fun fiveTask(){
+    val masWords = mutableListOf<String>()
+    println("Введите список слов (признак окончания ввода - пустое значение): ")
+    for (i in generateSequence(0) { it }){
+        val word = readln().toString()
+        if (word != "") masWords.add(word) else break
+    }
+    //val masWords = listOf("bread","bed","red","read","deer","dear","beard","dead","bread","bard")
+    println(masWords)
+    //уникальный список из уникальных списков из символов
+    val spisok: MutableSet<Set<Char>> = mutableSetOf()
+    for (wor in masWords){
+        spisok.add(wor.toSortedSet())
+    }
+    spisok.forEach{print("$it ")}
+    println()
+    val karta: MutableMap<Set<Char>,List<String>> = mutableMapOf()
+    for (wor in masWords){
+        if (karta[wor.toSortedSet()] == null) karta[wor.toSortedSet()] = listOf(wor)
+        else karta[wor.toSortedSet()] = karta[wor.toSortedSet()]!!.toList()+wor
 
+    }
+    karta.forEach{ print("$it ") }
 }
 
 fun threeTask(){
